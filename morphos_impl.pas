@@ -5,7 +5,7 @@ unit morphos_impl;
 interface
 
 uses
-  Classes, SysUtils, strutils, restjson, morher_interface;
+  Classes, SysUtils, strutils, restjson, morher_interface, LazUtf8;
 
 const
   MORPHOS_URL = 'http://morphos.io/api/inflect-name?name=%s&_format=json';
@@ -62,8 +62,12 @@ begin
 end;
 
 function TMorphosImpl.GetWordsCase(Words: string): CasesResponse;
+var
+  inf: TWordCase;
 begin
   Result := GetInitials(Words);
+  for inf in TWordCase do
+    Result[inf] := UTF8LowerString(Result[inf]);
 end;
 
 function TMorphosImpl.GetGenderAndInitials(Initials: string; var Gender: TGender
@@ -85,6 +89,7 @@ begin
        'f': Gender := Female;
        else Gender := UnrecognizedGender;
   end;
+  response.Free;
   rest.Free;
 end;
 

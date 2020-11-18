@@ -29,16 +29,18 @@
         <Filename Value="morher_interface.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="5" Y="22"/>
+        <CursorPos X="12" Y="12"/>
         <UsageCount Value="33"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="pymorphy_impl.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="56" Y="50"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="61"/>
+        <CursorPos X="50" Y="82"/>
         <UsageCount Value="33"/>
+        <Loaded Value="True"/>
       </Unit3>
       <Unit4>
         <Filename Value="urlencode.pas"/>
@@ -65,16 +67,17 @@
       <Unit7>
         <Filename Value="morphos_impl.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="3"/>
-        <CursorPos X="60" Y="74"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="69"/>
+        <CursorPos X="50" Y="70"/>
         <UsageCount Value="28"/>
         <Loaded Value="True"/>
       </Unit7>
       <Unit8>
         <Filename Value="restjson.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <CursorPos X="65" Y="11"/>
         <UsageCount Value="22"/>
         <Loaded Value="True"/>
@@ -235,8 +238,9 @@
         <Filename Value="C:\lazarus\components\lazutils\lazutf8.pas"/>
         <UnitName Value="LazUTF8"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="103"/>
-        <UsageCount Value="9"/>
+        <TopLine Value="1401"/>
+        <CursorPos X="3" Y="1283"/>
+        <UsageCount Value="10"/>
       </Unit32>
       <Unit33>
         <Filename Value="C:\lazarus\lcl\controls.pp"/>
@@ -256,13 +260,13 @@
       <Unit35>
         <Filename Value="C:\lazarus\fpc\3.2.0\source\rtl\win32\classes.pp"/>
         <UnitName Value="Classes"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="6"/>
         <CursorPos X="38" Y="8"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit35>
     </Units>
-    <JumpHistory Count="22" HistoryIndex="21">
+    <JumpHistory Count="27" HistoryIndex="26">
       <Position1>
         <Filename Value="morphos_impl.pas"/>
         <Caret Line="74" Column="42" TopLine="59"/>
@@ -351,6 +355,26 @@
         <Filename Value="restjson.pas"/>
         <Caret Line="8" Column="6"/>
       </Position22>
+      <Position23>
+        <Filename Value="morphos_impl.pas"/>
+        <Caret Line="8" Column="64"/>
+      </Position23>
+      <Position24>
+        <Filename Value="morph_fabric.pas"/>
+        <Caret Line="9" Column="26"/>
+      </Position24>
+      <Position25>
+        <Filename Value="morphos_impl.pas"/>
+        <Caret Line="66" Column="48" TopLine="31"/>
+      </Position25>
+      <Position26>
+        <Filename Value="pymorphy_impl.pas"/>
+        <Caret Line="78" Column="45" TopLine="63"/>
+      </Position26>
+      <Position27>
+        <Filename Value="pymorphy_impl.pas"/>
+        <Caret Line="82" Column="49" TopLine="61"/>
+      </Position27>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

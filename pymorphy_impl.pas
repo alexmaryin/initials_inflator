@@ -75,18 +75,11 @@ end;
 
 function TPymorphyImpl.GetWordsCase(Words: string): CasesResponse;
 var
-  w: string;
   inf: TWordCase;
-  warr: Casesresponse;
 begin
-  for w in SplitString(Words, ' ') do
-  begin
-    warr := GetWord(w);
-    for inf in TWordCase do
-      Result[inf] += warr[inf] + ' ';
-  end;
+  Result := GetInitials(Words);
   for inf in TWordCase do
-    Result[inf] := TrimRight(Result[inf]);
+    Result[inf] := UTF8LowerString(Result[inf]);
 end;
 
 function TPymorphyImpl.GetGenderAndInitials(Initials: string;
