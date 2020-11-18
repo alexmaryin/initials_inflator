@@ -20,6 +20,7 @@ type
   public
     function GetInitials (Initials: string): CasesResponse;
    function GetWordsCase (Words: string): CasesResponse;
+   function GetGenderAndInitials(Initials: string; var Gender: TGender): CasesResponse;
   end;
 
 implementation
@@ -33,7 +34,13 @@ end;
 
 function TDadataImpl.GetWordsCase(Words: string): CasesResponse;
 begin
-   raise Exception.Create('No implemented yet!')
+   raise Exception.Create('No implemented yet!');
+end;
+
+function TDadataImpl.GetGenderAndInitials(Initials: string; var Gender: TGender
+  ): CasesResponse;
+begin
+  raise Exception.Create('No implemented yet!');
 end;
 
 end.
