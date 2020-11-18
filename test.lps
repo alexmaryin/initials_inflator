@@ -12,7 +12,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="33"/>
+        <UsageCount Value="35"/>
       </Unit0>
       <Unit1>
         <Filename Value="testform.pas"/>
@@ -20,18 +20,18 @@
         <ComponentName Value="Form1"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <CursorPos X="14" Y="9"/>
-        <UsageCount Value="33"/>
+        <CursorPos X="41" Y="41"/>
+        <UsageCount Value="35"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="morher_interface.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="12" Y="12"/>
-        <UsageCount Value="33"/>
+        <TopLine Value="4"/>
+        <CursorPos X="51" Y="13"/>
+        <UsageCount Value="35"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
@@ -40,7 +40,7 @@
         <EditorIndex Value="3"/>
         <TopLine Value="61"/>
         <CursorPos X="50" Y="82"/>
-        <UsageCount Value="33"/>
+        <UsageCount Value="35"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
@@ -48,14 +48,15 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="41" Y="11"/>
-        <UsageCount Value="33"/>
+        <UsageCount Value="35"/>
       </Unit4>
       <Unit5>
         <Filename Value="morph_fabric.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="2"/>
-        <CursorPos X="26" Y="9"/>
-        <UsageCount Value="32"/>
+        <TopLine Value="51"/>
+        <CursorPos X="19" Y="48"/>
+        <UsageCount Value="34"/>
         <Loaded Value="True"/>
       </Unit5>
       <Unit6>
@@ -63,15 +64,15 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="30"/>
-        <UsageCount Value="29"/>
+        <UsageCount Value="31"/>
       </Unit6>
       <Unit7>
         <Filename Value="morphos_impl.pas"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="42"/>
-        <CursorPos X="49" Y="84"/>
-        <UsageCount Value="28"/>
+        <CursorPos X="64" Y="33"/>
+        <UsageCount Value="30"/>
         <Loaded Value="True"/>
       </Unit7>
       <Unit8>
@@ -79,7 +80,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="5"/>
         <CursorPos X="3" Y="13"/>
-        <UsageCount Value="22"/>
+        <UsageCount Value="24"/>
         <Loaded Value="True"/>
       </Unit8>
       <Unit9>
@@ -267,124 +268,124 @@
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="testform.pas"/>
-        <Caret Line="9" Column="30"/>
+        <Filename Value="morphos_impl.pas"/>
+        <Caret Line="79" Column="22" TopLine="58"/>
       </Position1>
       <Position2>
-        <Filename Value="testform.pas"/>
-        <Caret Line="39" Column="45" TopLine="24"/>
+        <Filename Value="morphos_impl.pas"/>
+        <Caret Line="10" Column="21"/>
       </Position2>
       <Position3>
         <Filename Value="morphos_impl.pas"/>
-        <Caret Line="47" Column="55" TopLine="34"/>
+        <Caret Line="69" Column="20" TopLine="54"/>
       </Position3>
       <Position4>
         <Filename Value="morphos_impl.pas"/>
-        <Caret Line="43" Column="89" TopLine="25"/>
+        <Caret Line="77" TopLine="60"/>
       </Position4>
       <Position5>
-        <Filename Value="morph_fabric.pas"/>
-        <Caret Line="9" Column="39"/>
+        <Filename Value="morphos_impl.pas"/>
+        <Caret Line="63" Column="56" TopLine="55"/>
       </Position5>
       <Position6>
         <Filename Value="morphos_impl.pas"/>
-        <Caret Line="90" Column="49" TopLine="80"/>
+        <Caret Line="9" Column="26"/>
       </Position6>
       <Position7>
         <Filename Value="morphos_impl.pas"/>
-        <Caret Line="48" Column="29" TopLine="33"/>
+        <Caret Line="8" Column="22" TopLine="2"/>
       </Position7>
       <Position8>
-        <Filename Value="morphos_impl.pas"/>
-        <Caret Line="52" Column="9" TopLine="37"/>
+        <Filename Value="testform.pas"/>
+        <Caret Line="9" Column="14"/>
       </Position8>
       <Position9>
         <Filename Value="morphos_impl.pas"/>
-        <Caret Line="69" Column="28"/>
+        <Caret Line="8" Column="36"/>
       </Position9>
       <Position10>
-        <Filename Value="morphos_impl.pas"/>
-        <Caret Line="3" Column="13"/>
+        <Filename Value="morph_fabric.pas"/>
+        <Caret Line="9" Column="26"/>
       </Position10>
       <Position11>
-        <Filename Value="morphos_impl.pas"/>
-        <Caret Line="79" Column="22" TopLine="58"/>
+        <Filename Value="restjson.pas"/>
+        <Caret Line="8" Column="6"/>
       </Position11>
       <Position12>
         <Filename Value="morphos_impl.pas"/>
-        <Caret Line="10" Column="21"/>
+        <Caret Line="8" Column="64"/>
       </Position12>
       <Position13>
-        <Filename Value="morphos_impl.pas"/>
-        <Caret Line="69" Column="20" TopLine="54"/>
+        <Filename Value="morph_fabric.pas"/>
+        <Caret Line="9" Column="26"/>
       </Position13>
       <Position14>
         <Filename Value="morphos_impl.pas"/>
-        <Caret Line="77" TopLine="60"/>
+        <Caret Line="66" Column="48" TopLine="31"/>
       </Position14>
       <Position15>
-        <Filename Value="morphos_impl.pas"/>
-        <Caret Line="63" Column="56" TopLine="55"/>
+        <Filename Value="pymorphy_impl.pas"/>
+        <Caret Line="78" Column="45" TopLine="63"/>
       </Position15>
       <Position16>
-        <Filename Value="morphos_impl.pas"/>
-        <Caret Line="9" Column="26"/>
+        <Filename Value="pymorphy_impl.pas"/>
+        <Caret Line="82" Column="49" TopLine="61"/>
       </Position16>
       <Position17>
-        <Filename Value="morphos_impl.pas"/>
-        <Caret Line="8" Column="22" TopLine="2"/>
+        <Filename Value="restjson.pas"/>
+        <Caret Line="27" Column="15" TopLine="7"/>
       </Position17>
       <Position18>
-        <Filename Value="testform.pas"/>
-        <Caret Line="9" Column="14"/>
+        <Filename Value="restjson.pas"/>
+        <Caret Line="33" Column="5" TopLine="22"/>
       </Position18>
       <Position19>
-        <Filename Value="morphos_impl.pas"/>
-        <Caret Line="8" Column="36"/>
+        <Filename Value="restjson.pas"/>
+        <Caret Line="31" Column="22" TopLine="16"/>
       </Position19>
       <Position20>
-        <Filename Value="morph_fabric.pas"/>
-        <Caret Line="9" Column="26"/>
+        <Filename Value="restjson.pas"/>
+        <Caret Line="60" Column="18" TopLine="16"/>
       </Position20>
       <Position21>
-        <Filename Value="restjson.pas"/>
-        <Caret Line="8" Column="6"/>
+        <Filename Value="morph_fabric.pas"/>
+        <Caret Line="22" Column="49" TopLine="10"/>
       </Position21>
       <Position22>
-        <Filename Value="morphos_impl.pas"/>
-        <Caret Line="8" Column="64"/>
+        <Filename Value="morph_fabric.pas"/>
+        <Caret Line="23" Column="34" TopLine="14"/>
       </Position22>
       <Position23>
         <Filename Value="morph_fabric.pas"/>
-        <Caret Line="9" Column="26"/>
+        <Caret Line="24" Column="89"/>
       </Position23>
       <Position24>
-        <Filename Value="morphos_impl.pas"/>
-        <Caret Line="66" Column="48" TopLine="31"/>
+        <Filename Value="testform.pas"/>
+        <Caret Line="52" Column="16" TopLine="24"/>
       </Position24>
       <Position25>
-        <Filename Value="pymorphy_impl.pas"/>
-        <Caret Line="78" Column="45" TopLine="63"/>
+        <Filename Value="morph_fabric.pas"/>
+        <Caret Line="26" Column="22" TopLine="12"/>
       </Position25>
       <Position26>
-        <Filename Value="pymorphy_impl.pas"/>
-        <Caret Line="82" Column="49" TopLine="61"/>
+        <Filename Value="morph_fabric.pas"/>
+        <Caret Line="57" Column="29" TopLine="34"/>
       </Position26>
       <Position27>
-        <Filename Value="restjson.pas"/>
-        <Caret Line="27" Column="15" TopLine="7"/>
+        <Filename Value="morph_fabric.pas"/>
+        <Caret Line="26" Column="48" TopLine="11"/>
       </Position27>
       <Position28>
-        <Filename Value="restjson.pas"/>
-        <Caret Line="33" Column="5" TopLine="22"/>
+        <Filename Value="morph_fabric.pas"/>
+        <Caret Line="31" Column="50" TopLine="16"/>
       </Position28>
       <Position29>
-        <Filename Value="restjson.pas"/>
-        <Caret Line="31" Column="22" TopLine="16"/>
+        <Filename Value="morph_fabric.pas"/>
+        <Caret Line="33" Column="50" TopLine="18"/>
       </Position29>
       <Position30>
-        <Filename Value="restjson.pas"/>
-        <Caret Line="60" Column="18" TopLine="16"/>
+        <Filename Value="morph_fabric.pas"/>
+        <Caret Line="60" Column="56" TopLine="50"/>
       </Position30>
     </JumpHistory>
     <RunParams>

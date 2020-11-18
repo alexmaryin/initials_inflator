@@ -19,8 +19,6 @@ type
     Label1: TLabel;
     ResultMemo: TMemo;
     procedure Button1Click(Sender: TObject);
-  private
-    Morpher: IInitialsMorpher;
   end;
 
 var
@@ -34,9 +32,10 @@ implementation
 
 procedure TForm1.Button1Click(Sender: TObject);
 var
+  Morpher: IInitialsMorpher;
   response: CasesResponse;
 begin
-  Morpher := TMorphFabric.GetActual(MORPHOS);
+  Morpher := TMorphFabric.Create(MORPHOS);
   ResultMemo.Clear;
   try
     if CheckInitial.Checked then
