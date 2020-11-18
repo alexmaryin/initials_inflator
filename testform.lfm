@@ -1,0 +1,56 @@
+object Form1: TForm1
+  Left = 337
+  Height = 219
+  Top = 191
+  Width = 511
+  Caption = 'Тест библиотеки для склонения слов'
+  ClientHeight = 219
+  ClientWidth = 511
+  LCLVersion = '2.0.10.0'
+  object Label1: TLabel
+    Left = 8
+    Height = 15
+    Top = 8
+    Width = 193
+    Caption = 'Введите ФИО или словосочетание:'
+    ParentColor = False
+  end
+  object TestEdit: TEdit
+    Left = 216
+    Height = 23
+    Top = 8
+    Width = 288
+    TabOrder = 0
+    Text = 'Иван Иванов'
+  end
+  object CheckInitial: TCheckBox
+    Left = 216
+    Height = 19
+    Top = 32
+    Width = 47
+    Caption = 'ФИО'
+    Checked = True
+    State = cbChecked
+    TabOrder = 1
+  end
+  object Button1: TButton
+    Left = 8
+    Height = 25
+    Top = 48
+    Width = 147
+    Caption = 'Отправить запрос'
+    OnClick = Button1Click
+    TabOrder = 2
+  end
+  object ResultMemo: TMemo
+    Left = 8
+    Height = 130
+    Top = 80
+    Width = 499
+    Lines.Strings = (
+      'Результат будет выведен здесь'
+    )
+    ReadOnly = True
+    TabOrder = 3
+  end
+end
