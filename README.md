@@ -1,5 +1,5 @@
-# initials_inflator #freepascal #lazarus #delphi
-Linrary provides a functions to inflate russian initials to the any cases with gender reccgnize using different rest api
+# initials_inflator #freepascal #lazarus
+Library provides functions to inflate russian initials to any case with gender recognize using different rest api
 
 Interface of library:
 
@@ -18,4 +18,4 @@ Interface of library:
   TGender = (Male, Female, Unrecognized);
   CasesResponse = array[TWordCase] of string;
 
-  Use generics for ResApi service
+  Use generics for RestApi service.
