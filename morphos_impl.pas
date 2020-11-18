@@ -5,12 +5,10 @@ unit morphos_impl;
 interface
 
 uses
-  Classes, SysUtils, httpsend, fpjson, strutils, fpjsonrtti,
-  morher_interface;
+  Classes, SysUtils, strutils, restjson, morher_interface;
 
 const
   MORPHOS_URL = 'http://morphos.io/api/inflect-name?name=%s&_format=json';
-  MORPHOS_ERROR = 'Сервис ответил ошибкой';
 
 type
 
@@ -33,15 +31,10 @@ type
   { TMorphosImpl }
 
   TMorphosImpl = class(TInterfacedObject, IInitialsMorpher)
-  private
-    HTTPSender: THTTPSend;
-    JSONStreamer: TJSONDeStreamer;
-    response: TMorphosResponse;
   public
     function GetInitials (Initials: string): CasesResponse;
     function GetWordsCase (Words: string): CasesResponse;
-    constructor Create;
-    destructor Destroy; override;
+    function GetGenderAndInitials(Initials: string; var Gender: TGender): CasesResponse;
   end;
 
 implementation
@@ -63,17 +56,9 @@ end;
 
 function TMorphosImpl.GetInitials(Initials: string): CasesResponse;
 var
-  inf: TWordCase;
-  i: integer = 0;
+  MokeGender: TGender = UnrecognizedGender;
 begin
-  HTTPSender.Clear;
-  if not HTTPSender.HTTPMethod('GET',Replacetext(Format(MORPHOS_URL, [Initials]), ' ', '+')) then
-    raise EInOutError.Create(MORPHOS_ERROR);
-  JSONStreamer.JSONToObject(GetJSON(HTTPSender.Document) as TJSONObject,response);
-  for inf in TWordCase do begin
-      Result[inf] := response.cases[i];
-      inc(i);
-  end;
+  Result := GetGenderAndInitials(Initials, MokeGender);
 end;
 
 function TMorphosImpl.GetWordsCase(Words: string): CasesResponse;
@@ -81,19 +66,26 @@ begin
   Result := GetInitials(Words);
 end;
 
-constructor TMorphosImpl.Create;
+function TMorphosImpl.GetGenderAndInitials(Initials: string; var Gender: TGender
+  ): CasesResponse;
+var
+  inf: TWordCase;
+  i: integer = 0;
+  rest: specialize TRestApi<TMorphosResponse>;
+  response: TMorphosResponse;
 begin
-  HTTPSender := THTTPSend.Create;
-  JSONStreamer := TJSONDeStreamer.Create(nil);
-  response := TMorphosResponse.Create;
-end;
-
-destructor TMorphosImpl.Destroy;
-begin
-  FreeAndNil(HTTPSender);
-  FreeAndNil(JSONStreamer);
-  FreeAndNil(response);
-  inherited Destroy;
+  rest := specialize TRestApi<TMorphosResponse>.Create;
+  response := rest.JSONfromRestUri(Replacetext(Format(MORPHOS_URL, [Initials]), ' ', '+'));
+  for inf in TWordCase do begin
+      Result[inf] := response.cases[i];
+      inc(i);
+  end;
+  case response.gender of
+       'm': Gender := Male;
+       'f': Gender := Female;
+       else Gender := UnrecognizedGender;
+  end;
+  rest.Free;
 end;
 
 end.

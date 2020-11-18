@@ -27,6 +27,7 @@ type
   public
     function GetInitials(Initials: string): CasesResponse;
     function GetWordsCase(Words: string): CasesResponse;
+    function GetGenderAndInitials(Initials: string; var Gender: TGender): CasesResponse;
     constructor Create;
     destructor Destroy; override;
   end;
@@ -38,6 +39,7 @@ implementation
 function TPymorphyImpl.GetWord(word: string): CasesResponse;
 var
   inf: TWordCase;
+
 begin
   HTTPSender.Clear;
   if not HTTPSender.HTTPMethod('GET', Replacetext(Format(PYMORPHY_URL, [word]),
@@ -85,6 +87,12 @@ begin
   end;
   for inf in TWordCase do
     Result[inf] := TrimRight(Result[inf]);
+end;
+
+function TPymorphyImpl.GetGenderAndInitials(Initials: string;
+  var Gender: TGender): CasesResponse;
+begin
+  raise Exception.Create('No implemented yet!');
 end;
 
 constructor TPymorphyImpl.Create;

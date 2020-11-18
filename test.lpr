@@ -8,7 +8,7 @@ uses
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms, testform, morher_interface, pymorphy_impl, urlencode, morph_fabric,
-  dadata_impl, morphos_impl
+  dadata_impl, morphos_impl, restjson
   { you can add units after this };
 
 {$R *.res}

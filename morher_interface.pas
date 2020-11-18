@@ -10,7 +10,7 @@ uses
 type
 
   TWordCase = (Nominative, Gentitive, Dative, Accusative, Instrumental, Prepositional);
-  TGender = (Male, Female, Unrecognized);
+  TGender = (Male, Female, UnrecognizedGender);
 
   CasesResponse = array[TWordCase] of string;
 
@@ -25,7 +25,7 @@ type
     function GetWordsCase(Words: string): CasesResponse;
 
     // Returns initials in needed case in simple string with gender in var-parameter
-    function GetGenderAndInitials(Initials: string; var Gender: TGender): CaseResponse;
+    function GetGenderAndInitials(Initials: string; var Gender: TGender): CasesResponse;
   end;
 
 implementation

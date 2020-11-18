@@ -17,3 +17,5 @@ Interface of library:
   TWordCase = (Nominative, Gentitive, Dative, Accusative, Instrumental, Prepositional);
   TGender = (Male, Female, Unrecognized);
   CasesResponse = array[TWordCase] of string;
+
+  Use generics for ResApi service
