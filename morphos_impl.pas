@@ -75,11 +75,10 @@ function TMorphosImpl.GetGenderAndInitials(Initials: string; var Gender: TGender
 var
   inf: TWordCase;
   i: integer = 0;
-  rest: specialize TRestApi<TMorphosResponse>;
   response: TMorphosResponse;
 begin
-  rest := specialize TRestApi<TMorphosResponse>.Create;
-  response := rest.JSONfromRestUri(Replacetext(Format(MORPHOS_URL, [Initials]), ' ', '+'));
+  response := specialize JSONfromRestUri<TMorphosResponse>
+                (Replacetext(Format(MORPHOS_URL, [Initials]), ' ', '+'));
   for inf in TWordCase do begin
       Result[inf] := response.cases[i];
       inc(i);
@@ -90,8 +89,7 @@ begin
        else Gender := UnrecognizedGender;
   end;
   response.Free;
-  rest.Free;
-end;
+  end;
 
 end.
 
