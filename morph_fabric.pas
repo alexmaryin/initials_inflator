@@ -64,7 +64,6 @@ begin
   if Cache.TryGetValue(Initials,value) then
     begin
       CachedValue := value.cases;
-      CachedValue[Nominative] += ' from cache!';
       CachedGender := value.gender;
       value.lastUse:= Now();
       Cache.AddOrSetValue(Initials,value);
@@ -152,24 +151,25 @@ var
   jsonfile: TStringList;
   str: string;
 begin
-  // write back Cache to file
   Json := TJSONArray.Create;
-  for cached in Cache do
-    begin
-      jarr := TJSONArray.Create;
-      for str in cached.Value.cases do
-        jarr.Add(str);
-      jarr.Add(GetEnumName(TypeInfo(TGender),Ord(cached.Value.gender)));
-      jarr.Add(FormatDateTime('DD.MM.YYYY',cached.Value.lastUse));
-      Item := CreateJSONObject([cached.Key, jarr]);
-      Json.Add(Item);
-    end;
-  jsonfile := TStringList.Create;
-  jsonfile.Text := Json.FormatJSON();
-  jsonfile.SaveToFile(INITIALS_CACHE);
-  jsonfile.Free;
-  Json.Free;
-  FreeAndNil(Cache);
+  if CacheAllowed then begin
+    for cached in Cache do
+      begin
+        jarr := TJSONArray.Create;
+        for str in cached.Value.cases do
+          jarr.Add(str);
+        jarr.Add(GetEnumName(TypeInfo(TGender),Ord(cached.Value.gender)));
+        jarr.Add(FormatDateTime('DD.MM.YYYY',cached.Value.lastUse));
+        Item := CreateJSONObject([cached.Key, jarr]);
+        Json.Add(Item);
+      end;
+    jsonfile := TStringList.Create;
+    jsonfile.Text := Json.FormatJSON();
+    jsonfile.SaveToFile(INITIALS_CACHE);
+    jsonfile.Free;
+    Json.Free;
+    FreeAndNil(Cache);
+  end;
   inherited Destroy;
 end;
 
