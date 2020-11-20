@@ -7,24 +7,18 @@ interface
 uses
   Classes, SysUtils, httpsend, fpjson, fpjsonrtti;
 
-const
+resourcestring
   RESTOUT_ERROR = 'REST API service does not return any result';
 
-//type
+{ Дальше идет объявление класса-пустышки только из-за того, что Lazarus
+  не хочет воспринимать простое объявление дженерик-функции как верное,
+  и не хочет дальше парсить код, автозаполнять и подсказывать... }
 
-  //{ TRestApi }
-  //
-  //generic TRestApi<T> = class
-  //private
-  //  HTTPSender: THTTPSend;
-  //  JSONStreamer: TJSONDeStreamer;
-  //public
-  //  function JSONfromRestUri(Uri: string): T;
-  //  constructor Create;
-  //  destructor Destroy; override;
-  //end;
+type
+    TDummy = class
+      end;
 
-  generic function JSONfromRestUri<T>(Uri: string): T;
+generic function JSONfromRestUri<T>(Uri: string): T;
 
 implementation
 
@@ -32,38 +26,18 @@ generic function JSONfromRestUri<T>(Uri: string): T;
 var
   HTTPSender: THTTPSend;
   JSONStreamer: TJSONDeStreamer;
+  Json: TJSONObject;
 begin
   HTTPSender := THTTPSend.Create;
   JSONStreamer := TJSONDeStreamer.Create(nil);
   HTTPSender.Clear;
   Result := T.Create;
   if not HTTPSender.HTTPMethod('GET', Uri) then raise EInOutError.Create(RESTOUT_ERROR);
-  JSONStreamer.JSONToObject(GetJSON(HTTPSender.Document) as TJSONObject, Result);
-  FreeAndNil(HTTPSender);
+  JSON := GetJSON(HTTPSender.Document) as TJSONObject;
+  JSONStreamer.JSONToObject(JSON, Result);
+  FreeAndNil(JSON);
   FreeAndNil(JSONStreamer);
+  FreeAndNil(HTTPSender);
 end;
-
-{ TRestApi }
-
-//constructor TRestApi.Create;
-//begin
-//  HTTPSender := THTTPSend.Create;
-//  JSONStreamer := TJSONDeStreamer.Create(nil);
-//end;
-//
-//function TRestApi.JSONfromRestUri(Uri: string): T;
-//begin
-//  HTTPSender.Clear;
-//  Result := T.Create;
-//  if not HTTPSender.HTTPMethod('GET', Uri) then raise EInOutError.Create(RESTOUT_ERROR);
-//  JSONStreamer.JSONToObject(GetJSON(HTTPSender.Document) as TJSONObject, Result);
-//end;
-//
-//destructor TRestApi.Destroy;
-//begin
-//  FreeAndNil(HTTPSender);
-//  FreeAndNil(JSONStreamer);
-//  inherited Destroy;
-//end;
 
 end.

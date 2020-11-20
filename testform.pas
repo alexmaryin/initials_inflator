@@ -55,6 +55,5 @@ begin
    Morpher := TMorphFabric.Create(MORPHOS);
 end;
 
-
 end.
 

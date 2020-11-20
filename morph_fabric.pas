@@ -5,11 +5,12 @@ unit morph_fabric;
 interface
 
 uses
-  Classes, SysUtils, Generics.Collections, Generics.Defaults, fpjson, typinfo,
+  Classes, SysUtils, Generics.Collections, Generics.Defaults, fpjson, typinfo, lazUTF8,
   morher_interface, pymorphy_impl, dadata_impl, morphos_impl;
 
 const
-  INITIALS_CACHE = 'cache'+PathDelim+'initials_cached.json';
+  INITIALS_CACHE_DIR = 'cache';
+  INITIALS_CACHE_FILE = INITIALS_CACHE_DIR+PathDelim+'initials_cached.json';
 type
 
   MorphProvider = (PYMORPHY, DADATA, MORPHOS);
@@ -20,7 +21,8 @@ type
     cases: CasesResponse;
     gender: TGender;
     lastUse: TDateTime;
-    class function Create(_cases: CasesResponse; _gender: TGender; _lastuse: TDateTime): TCachedValue; static;
+    class function Create(_cases: CasesResponse; _gender: TGender;
+          _lastuse: TDateTime): TCachedValue; static;
   end;
 
   { TMorphFabric }
@@ -33,6 +35,8 @@ type
     CachedValue: CasesResponse;
     CachedGender: TGender;
     function IsCached(Initials: string): boolean;
+    procedure LoadCacheFromFile;
+    procedure SaveCacheToFile;
     procedure SavetoCache(key: string; cases: CasesResponse; gender: TGender);
   public
     function GetInitials (Initials: string): CasesResponse;
@@ -71,6 +75,64 @@ begin
     end;
 end;
 
+procedure TMorphFabric.LoadCacheFromFile;
+var
+  cached: specialize TPair<string, TCachedValue>;
+  jarr: TJSONArray;
+  i, j: integer;
+  item: TJSONObject;
+  jData: TJSONData;
+  Cachefile: TStringList;
+begin
+  Cache := specialize THashMap<string, TCachedValue>.Create;
+  Cachefile := TStringList.Create;
+  if FileExists(INITIALS_CACHE_FILE) then Cachefile.LoadFromFile(INITIALS_CACHE_FILE);
+  if Cachefile.Count > 0 then begin
+    jData := GetJSON(Cachefile.Text);
+    for i := 0 to jData.Count - 1 do begin
+      item :=  TJSONObject(jData.Items[i]);
+      cached.Key := item.Names[0];
+      jArr := item.Arrays[cached.Key];
+      for j := 0 to Ord(High(TWordCase)) do
+        cached.Value.cases[TWordCase(j)] := jArr.Items[j].AsString;
+      cached.Value.gender := TGender(GetEnumValue(TypeInfo(TGender),
+        jArr.Items[6].AsString));
+      cached.Value.lastUse := StrToDate(jArr.Items[7].AsString, 'd/m/y', '.');
+      Cache.Add(cached);
+    end;
+    FreeAndNil(jData);
+  end;
+  CacheFile.Free;
+end;
+
+procedure TMorphFabric.SaveCacheToFile;
+var
+  str: string;
+  jsonfile: TStringList;
+  cached: specialize TPair<string, TCachedValue>;
+  jarr, Json: TJSONArray;
+  Item: TJSONObject;
+begin
+  Json := TJSONArray.Create;
+  for cached in Cache do
+    begin
+      jarr := TJSONArray.Create;
+      for str in cached.Value.cases do
+        jarr.Add(str);
+      jarr.Add(GetEnumName(TypeInfo(TGender), Ord(cached.Value.gender)));
+      jarr.Add(FormatDateTime('DD.MM.YYYY', cached.Value.lastUse));
+      Item := CreateJSONObject([cached.Key, jarr]);
+      Json.Add(Item);
+    end;
+  jsonfile := TStringList.Create;
+  jsonfile.Text := Json.FormatJSON();
+  if not DirectoryExists(INITIALS_CACHE_DIR) then MkDir(INITIALS_CACHE_DIR);
+  jsonfile.SaveToFile(INITIALS_CACHE_FILE);
+  FreeAndNil(jsonfile);
+  FreeAndNil(Json);
+  FreeAndNil(Cache);
+end;
+
 procedure TMorphFabric.SavetoCache(key: string; cases: CasesResponse; gender: TGender);
 begin
   if not Cache.ContainsKey(key) then
@@ -87,33 +149,27 @@ begin
 end;
 
 function TMorphFabric.GetWordsCase(Words: string): CasesResponse;
+var
+  inf: TWordCase;
 begin
-  //
+  Result := GetInitials(Words);
+  for inf in TWordCase do
+    Result[inf] := UTF8LowerString(Result[inf]);
 end;
 
-function TMorphFabric.GetGenderAndInitials(Initials: string; var Gender: TGender
-  ): CasesResponse;
+function TMorphFabric.GetGenderAndInitials(Initials: string; var Gender: TGender): CasesResponse;
 begin
-   if CacheAllowed and IsCached(Initials) then
-     begin
+   if CacheAllowed and IsCached(Initials) then begin
        Result := CachedValue;
        Gender := CachedGender;
      end
-   else
-     begin
+   else begin
        Result := Morpher.GetGenderAndInitials(Initials, Gender);
        if CacheAllowed then SavetoCache(Initials, Result, Gender);
      end;
 end;
 
 constructor TMorphFabric.Create(provider: MorphProvider; withCache: boolean);
-var
-  Cachefile: TStringList;
-  jData: TJSONData;
-  item: TJSONObject;
-  i, j: integer;
-  jarr: TJSONArray;
-  cached: specialize TPair<string,TCachedValue>;
 begin
   case provider of
          PYMORPHY: Morpher := TPymorphyImpl.Create;
@@ -121,58 +177,14 @@ begin
          MORPHOS: Morpher := TMorphosImpl.Create;
     end;
   CacheAllowed := withCache;
-  if CacheAllowed then begin
-    Cache := specialize THashMap<string, TCachedValue>.Create;
-    Cachefile := TStringList.Create;
-    if FileExists(INITIALS_CACHE) then Cachefile.LoadFromFile(INITIALS_CACHE);
-    if Cachefile.Count > 0 then begin
-      jData := GetJSON(Cachefile.Text);
-      for i := 0 to jData.Count - 1 do begin
-        item :=  TJSONObject(jData.Items[i]);
-        cached.Key := item.Names[0];
-        jArr := item.Arrays[cached.Key];
-        for j := 0 to Ord(High(TWordCase)) do
-          cached.Value.cases[TWordCase(j)] := jArr.Items[j].AsString;
-        cached.Value.gender := TGender(GetEnumValue(TypeInfo(TGender), jArr.Items[6].AsString));
-        cached.Value.lastUse := StrToDate(jArr.Items[7].AsString,'d/m/y','.');
-        Cache.Add(cached);
-      end;
-      jData.Free;
-      CacheFile.Free;
-    end;
-  end;
+  if CacheAllowed then LoadCacheFromFile;
 end;
 
 destructor TMorphFabric.Destroy;
-var
-  Item: TJSONObject;
-  Json, jarr: TJSONArray;
-  cached: specialize TPair<string,TCachedValue>;
-  jsonfile: TStringList;
-  str: string;
 begin
-  Json := TJSONArray.Create;
-  if CacheAllowed then begin
-    for cached in Cache do
-      begin
-        jarr := TJSONArray.Create;
-        for str in cached.Value.cases do
-          jarr.Add(str);
-        jarr.Add(GetEnumName(TypeInfo(TGender),Ord(cached.Value.gender)));
-        jarr.Add(FormatDateTime('DD.MM.YYYY',cached.Value.lastUse));
-        Item := CreateJSONObject([cached.Key, jarr]);
-        Json.Add(Item);
-      end;
-    jsonfile := TStringList.Create;
-    jsonfile.Text := Json.FormatJSON();
-    jsonfile.SaveToFile(INITIALS_CACHE);
-    jsonfile.Free;
-    Json.Free;
-    FreeAndNil(Cache);
-  end;
+  if CacheAllowed then SaveCacheToFile;
   inherited Destroy;
 end;
-
 
 end.
 

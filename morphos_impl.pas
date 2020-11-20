@@ -70,8 +70,7 @@ begin
     Result[inf] := UTF8LowerString(Result[inf]);
 end;
 
-function TMorphosImpl.GetGenderAndInitials(Initials: string; var Gender: TGender
-  ): CasesResponse;
+function TMorphosImpl.GetGenderAndInitials(Initials: string; var Gender: TGender): CasesResponse;
 var
   inf: TWordCase;
   i: integer = 0;
@@ -88,8 +87,8 @@ begin
        'f': Gender := Female;
        else Gender := UnrecognizedGender;
   end;
-  response.Free;
-  end;
+  FreeAndNil(response);
+end;
 
 end.
 
