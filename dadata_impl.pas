@@ -9,8 +9,8 @@ uses
   morher_interface;
 
 const
-  DADATA_TOKEN = '993c2a5164c3cd135b63a862e0aafc0e755d7baa';
-  DADATA_XSECRET = 'cb7d66126dbbfac088aa7e8337494a644778b925';
+  DADATA_TOKEN = '';
+  DADATA_XSECRET = '';
 
 type
 
